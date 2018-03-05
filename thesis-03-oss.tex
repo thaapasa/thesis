@@ -1,0 +1,476 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-------------------------------------------------------------------
+% Open-Source Web Development Solutions
+%-------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\selectlanguage{british}
+\chapter{Open-Source Web Development Solutions}
+\label{toc:oss}
+
+The previous chapter identified several areas of interest in web 
+development. In this chapter open-source solutions for those areas are 
+presented. The chapter begins with an introduction to open-source 
+software. After that, the usage of open-source software is justified. 
+Finally, the selected open-source solutions are presented.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Introduction to Open Source
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction to Open Source}
+\label{toc:oss:intro}
+
+Open-source\footnote{\citep{osi} suggests that when using the term
+\textsl{open source} as an adjective, it should be hyphenated.} 
+software, in contrast to proprietary software, is software that must 
+have its source code available for developers to see, improve and to 
+create derivative works from. Open source is not shareware, which is 
+mostly inexpensive proprietary software that can be tested freely 
+before buying it. On the other hand, open-source software does not 
+have to be free, in the meaning that users would not have to pay for 
+obtaining it. The defining characteristics of open-source software are 
+that users must be able to freely use, redistribute, modify and 
+distribute derivatives from the work, under the terms of the original 
+license \citep{ossolutions}. There are other requirements for 
+open-source software, but those are not covered in this work.
+
+The full definition of \abbrev{OSS} is that it must meet the Open 
+Source Definition (\abbrev{OSD}), which is maintained by the Open 
+Source Initiative \citep{osi}. \abbrev{OSI} is a non-profit 
+corporation that promotes the usage of open-source software in the 
+business world. In theory, anyone can contribute to the development of 
+an open-source program. This is a radical change from the proprietary, 
+in-house software development style. In the \abbrev{OS} development 
+model the software that is being created can be inspected by thousands 
+of developers from all around the world, instead of the selected few 
+developers of a proprietary software. According to \cite{osi}, this 
+reduces the development time of the software and improves the quality. 
+When the software is exposed, the software defects can also be found 
+faster.
+
+For developing software for your own use, such as creating a web 
+application that is installed on one of your own servers, there are 
+usually no restrictions on the use of open-source software. 
+\abbrev{OSS} licences most often only apply when you are distributing 
+the software. For example, the common \abbrev{GPL} license places 
+requirements for you only if you create a software derived from or 
+added to a \abbrev{GPL} software that you \textsl{actually distribute 
+to someone} \citep{ossolutions}. Nevertheless, the license terms must 
+be examined carefully when taking open-source solutions into use 
+\citep{usingoss}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Using Open-Source Software
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Using Open-Source Software}
+\label{toc:oss:usage}
+
+Open-source software is generally surrounded by myths and beliefs that 
+it cannot really compete with proprietary software. These beliefs are 
+referred to by open source proponents as \abbrev{FUD} for the fear, 
+uncertainty and doubt that they generate \citep{ossolutions}. It is 
+feared that the quality of the open-source software is not high 
+enough, that it is not documented, not standard and not mature enough. 
+Another fear is that the development and maintenance of a selected 
+open-source software stops, and soon the software cannot be used 
+anymore because of unfixed bugs or new technologies that are not 
+supported by the software.
+
+Unfortunately, new Internet technologies are often buggy and 
+non-standard, and this certainly applies to open-source software as 
+well \citep{usingj2ee}. However, there is one point about the quality 
+of open-source software that is not often thought of: the \abbrev{OSS} 
+development process is not tied to deadlines and budgets that haunt 
+the proprietary software development process. Instead, \abbrev{OSS} 
+development is driven by the technology itself. Often the primary goal 
+of an \abbrev{OSS} development project is technical excellence 
+\citep{ossolutions}. In comparison, proprietary software always has 
+business interests at the background, and sometimes those business 
+interests drive unfinished software to the market to meet the 
+deadlines.
+
+While it is possible for a very small open source project to die and 
+leave its users stranded with a piece of software they cannot use, a 
+mainstream open-source software that has a large user community is a 
+lasting solution that can be safely taken into use \citep{usingoss}. 
+If developers leave the \abbrev{OSS} development project others will 
+take their place.
+
+Many people fear that taking an open-source software into use 
+restricts the project into using only open-source software 
+\citep{ossolutions}. In truth, almost everyone is already using 
+open-source software, perhaps without even realising it. The 
+best-known open-source software is the Linux operating system, which 
+has surpassed the various proprietary Unix operating systems in the 
+server operating system market \citep{exploratoryos}. Another 
+well-known \abbrev{OS} software, the open-source Apache Web server 
+\citep{apache}, is used in over 60\% of the current web server 
+installations \citep{websurvey}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Open-Source Solutions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Open-Source Solutions}
+\label{toc:oss:selected}
+
+This section presents solutions for the different areas in web 
+development that were identified in chapter~\ref{toc:webdevel}. In 
+addition, some \abbrev{OS} solutions for other development supporting 
+purposes are introduced. The solutions given here represent 
+\textit{de~facto} standard, mainstream open-source solutions available 
+on the market currently. The focus is on production-quality, mature 
+software rather than bleeding-edge development versions of 
+\abbrev{OSS}.
+
+
+% Presentation Tier: Apache Struts
+%---------------------------------
+\subsection{Presentation Tier: Apache Struts}
+\label{toc:oss:selected:struts}
+
+For the presentation tier the Apache Struts framework is described 
+\citep{struts}. Struts is a web framework that supports the creation 
+of a web presentation tier. From late 2002, Struts became the natural 
+choice for Java~\abbrev{EE} web applications \citep{j2eeframeworks}. 
+Struts is still the standard choice for the presentation tier in web 
+applications, it is widely used and has a large user base 
+\citep{advancedwebdevel}. However, it is speculated that this is only 
+due to it being the first proper web framework on the market, and that 
+more recent frameworks will take its place somewhere in the future.
+
+Apache Struts implements the \abbrev{MVC} design pattern with a slight 
+modification to support web usage. In contrast to the traditional 
+\abbrev{MVC} model, where the model components \textsl{push} the 
+information to the view components, a web \abbrev{MVC} view component 
+must \textsl{pull} the information from the model while being rendered 
+\citep{j2eeframeworks}. In Struts, the \abbrev{MVC} parts are the 
+following \citep{masteringstruts}:
+
+\begin{description}
+\item[View] The JavaServer Pages that render the \abbrev{HTML} pages 
+shown to user
+
+\item[Controller] The \code{ActionServlet} class, which forwards the 
+request to \code{Action} subclasses
+
+\item[Model] Struts does not provide any model classes; these must be 
+provided by the application developer
+\end{description}
+
+Apache Struts functions around a single front controller, the 
+\code{ActionServlet}, which delegates all the requests coming to the 
+web application. The controller is configured by a configuration file 
+to forward the requests to specific actions, which process them based 
+on the input data. The actions can select the resulting page via 
+string-keyed mappings -- for example, an action might process the 
+request and return a mapping with the key "failure", which in turn can 
+be configured to point to a specific view page.
+
+In addition, Struts supports concentrated exception handling by 
+creating a subclass of \code{ExceptionHandler} provided by Struts and 
+attaching that to the desired actions via the configuration file. This 
+allows handling all the exceptions of the entire presentation tier, 
+which in turn makes the code of the actual actions simpler.
+
+In Struts, the \abbrev{HTML} input forms that are shown on application 
+views are mapped into \code{ActionForm} components, which must define 
+the fields of the form as JavaBean properties. Struts automatically 
+loads the values sent by the user to the \code{ActionForm} class, 
+where they can be easily fetched from. Struts also contains a 
+\textsl{Validator} component that can be configured to automatically 
+check the input values both on the client side and on the server side. 
+The Struts Validator has been later on moved to the Jakarta Commons 
+\citep{commons} project, which is a repository of reusable software 
+libraries.
+
+The actual \abbrev{(X)HTML} output can be generated with any suitable 
+techniques. However, Struts provides supportive tag libraries for 
+\abbrev{JSP} that extend the standard \abbrev{JSTL} libraries, and 
+supports using the \abbrev{JSTL} Expression Language with Struts EL. 
+For example, localised error messages can be rendered to output pages 
+with the \abbrev{HTML} tag library function \code{<html:errors~/>}.
+
+The main advantage of Struts is its structure, which is also its main 
+weakness. Basically, all Struts applications must be coded in a 
+similar fashion. Enforcing a given architecture keeps the code at 
+least above a certain level, but on the other hand, it also restricts 
+the freedom of the developers.
+
+
+% Business Tier: Spring Framework
+%--------------------------------------
+\subsection{Business Tier: Spring Framework}
+\label{toc:oss:selected:spring}
+
+The Spring Framework \citep{spring} is a Java~\abbrev{EE} framework 
+that is based on code published in \citep{j2eednd}. It was first 
+released as an open source project in January 2003, and it has quickly 
+become the dominant Java~\abbrev{EE} application framework 
+\citep{j2eeframeworks}. While Spring might provide less services than 
+full-blown frameworks, \cite{rapidspring} see its lesser complexity as 
+a way to increase productivity. Spring provides a way to create 
+Java~\abbrev{EE} compliant software without using \abbrev{EJB}.
+
+Spring is a layered framework, which means that developers can choose 
+the parts they need in their own application. At the core of Spring is 
+the inversion of control container and bean factories, which can be 
+used to create and configure the objects required by the application. 
+The creation and configuration of these objects, or beans, is based on 
+\abbrev{XML} configuration files. All beans under Spring have a 
+logical name that is used to setup the object configuration. The beans 
+can also be fetched in application code from the Spring container with 
+the logical names. In addition to managing references to other beans, 
+variables of normal primitive types can also be set via the 
+configuration files. This removes the need to have hard-coded 
+singleton configuration objects in the application code. Perhaps the 
+simplest way to integrate Spring to an application is just to move the 
+application object management under Spring configuration. 
+\citep{springintro}
+
+However, Spring also provides many other features. For example, the 
+\abbrev{JDBC} data sources of an application can be created, 
+configured and injected to objects that need them by Spring. Spring 
+does not, however, reinvent the wheel. There are no database 
+connection classes in Spring, but the standard components of the 
+developer's choice can be configured via Spring configuration files. 
+Spring supports integration to popular data access technologies, such 
+as Hibernate, \abbrev{JDO}, Oracle TopLink and iBATIS.
+
+For basic \abbrev{JDBC} access, Spring provides wrappers that change 
+the checked exceptions of \abbrev{JDBC} into unchecked ones. The 
+design idea behind this practice is that in most cases an application 
+cannot do anything about a database exception. In this situation it is 
+useless to force application developers to catch all exceptions. 
+\abbrev{JDBC} is one of the few data access \abbrev{API}s that still 
+use unchecked exceptions. TopLink, \abbrev{JDO}, and the newest 
+version\footnote{Hibernate switched from checked to unchecked 
+exceptions in version 3.} of Hibernate use unchecked exceptions 
+exclusively. In case of a recoverable exception, developers can still 
+catch the unchecked exception, they just are not forced to do so 
+\citep{springintro}.
+
+Spring also supports aspect-oriented programming (\abbrev{AOP}), has 
+its own web framework (the Spring Web \abbrev{MVC}) and is developed 
+to support easy testing. The Spring container can be initialised in a 
+single line of code to be used in the entire application as well as in 
+unit tests.
+
+
+% Database Tier: Hibernate
+%-------------------------
+\subsection{Database Tier: Hibernate}
+\label{toc:oss:selected:hibernate}
+
+The database tier requires communication with the actual databases. 
+Traditionally this has been accomplished by writing long queries with 
+the Structured Query Language (\abbrev{SQL}). Hibernate 
+\citep{hibernate} provides an alternative, light-weight approach: 
+mapping the model objects into database tables by simple configuration 
+files or by annotating the code itself with hints on how to store the 
+fields and hierarchies of objects. Hibernate is not the only solution 
+for the \abbrev{ORM} issue, but it was the first popular, fully 
+featured and open-source solution \citep{j2eeframeworks}, and it has 
+grown in popularity.
+
+Hibernate allows developers to write the data objects as Plain Old 
+Java Objects, or \abbrev{POJO}s, rather than force the usage of 
+\abbrev{EJB} with its remote and local interfaces. The \abbrev{POJO}s 
+are mapped either by writing configuration files or by annotating the 
+code itself. \textsl{Hibernate Annotations}, which was just released, 
+supports using Java 5 annotations to specify the object/relational 
+mapping for the persistent objects.
+
+The mapped objects can be stored to and fetched from the database via 
+simple methods such as \code{session.get(class, id)} and 
+\code{session.saveOrUpdate(object)}. More complex queries can be 
+written with Hibernate's replacement for \abbrev{SQL}, the Hibernate 
+Query Language. \abbrev{HQL} is similar in syntax with \abbrev{SQL}, 
+but references to objects and fields are written with the names of the 
+actual classes and their properties instead of the database tables and 
+columns. In addition, the \abbrev{HQL} parser obtains information 
+about the actual class hierarchy from the mapping configuration, and 
+uses that to fill in missing query information. For example, the 
+following statement is a perfectly valid \abbrev{HQL} query statement:
+
+\begin{quote}
+\code{from User as user where user.company.name = 'Firm'} 
+\end{quote}
+
+Object hierarchies are mapped automatically, with no need for 
+developers to query them manually. In a full-blown application that 
+uses Hibernate it is perfectly normal that there are no \abbrev{SQL} 
+queries and only a couple of \abbrev{HQL} ones (mostly for searches). 
+All the basic work will be done with the mapping specifications. 
+However, Hibernate does allow the usage of standard \abbrev{SQL} too, 
+for those situations where \abbrev{HQL} is not enough or a 
+non-standard, vendor-specific database extension is required. In fact, 
+developers can override all the queries that Hibernate automatically 
+constructs with custom \abbrev{SQL} ones.
+
+
+
+% Artifact Generation: XDoclet
+%-------------------------
+\subsection{Artifact Generation: XDoclet}
+\label{toc:oss:selected:xdoclet}
+
+For generating source code, the XDoclet engine is presented. XDoclet 
+is a widely used, extensible code generation engine 
+\citep{aspectizing}. Currently there are two different versions of 
+XDoclet, XDoclet~1~\citep{xdoclet1} and XDoclet~2~\citep{xdoclet2}. 
+XDoclet~2 is a rewrite of XDoclet~1, and these are developed and 
+maintained separately.
+
+XDoclet is an artifact generation engine that supports generating code 
+and artifacts for many existing technologies. These include 
+\abbrev{EJB}, Hibernate, JBoss, Struts and Spring Framework. The 
+artifacts are generated based on XDoclet annotation tags (which 
+resemble JavaDoc tags). Usually XDoclet code generation is tied to the 
+build process by invoking XDoclet via Ant tasks.
+
+Using XDoclet can reduce the amount of code written dramatically. For 
+example, a simple \abbrev{EJB} bean can consist of seven different 
+files which need to be maintained. With XDoclet it is possible to 
+maintain a single file, from which the rest are generated. 
+\citep{xdoclet1}
+
+
+% IDE: Eclipse
+%-------------
+\subsection{IDE: Eclipse}
+\label{toc:oss:selected:eclipse}
+
+For the development environment, the Eclipse platform \citep{eclipse} 
+is introduced. Eclipse has been gaining popularity ever since its 
+creation, has a very large support group and is now the Java 
+\abbrev{IDE} of choice for the open source developer 
+\citep{rapidspring,eclipseide}.
+
+Although Eclipse is actually a rich client platform that supports the 
+creation of any software (for example, a BitTorrent client called 
+Azureus is developed on top of Eclipse), the Java Development Toolkit 
+is the \abbrev{IDE} that is most often associated with the word 
+Eclipse.
+
+The current version of Eclipse's Java Development Toolkit provides 
+full support for the Java language, including the Java 5 extensions 
+(generics, annotations, and so on). The \abbrev{JDT} contains numerous 
+time-saving features such as code completion, class import management, 
+easy navigation between classes, searching for implementing classes 
+and subclasses, automatic JavaDoc showing and multiple refactoring 
+tools. Refactoring tools include the generation of getter and setter 
+methods for class fields and updating the calling code when renaming 
+or moving classes and methods.
+
+
+
+% Building: Apache Maven
+%-----------------------
+\subsection{Building: Apache Maven}
+\label{toc:oss:selected:maven}
+
+Any complex project requires a build tool. In traditional C 
+development, the Make tool has been the official tool for decades. 
+There are, however, shortcomings in Make with cross-platform Java 
+development, and so the Ant tool was developed and accepted as a 
+substitute for Make in the Java world \citep{ant}. Even though Ant has 
+many improvements over Make with cross-platform support and custom 
+build tasks, it is still based on the same idea as Make: both are 
+configured with long configuration files that contain instructions on 
+running all of the required build commands. Apache Maven \citep{maven} 
+is a popular open-source build tool based on a different ideology. 
+Maven favours the idea of \textsl{conventions over configuration}, 
+which means that build settings, such as source code directories and 
+build directories, can be shared between projects. In fact, Maven 
+defines a standard directory layout for projects. Those projects that 
+adhere to the standard layout do not need to configure their 
+application paths at all. A new project only needs to initialise the 
+Maven directory structure with a single Maven command, and fill in the 
+automatically created project object model (\abbrev{POM}) 
+configuration file. In the simplest case, only the name of the project 
+and the distribution packaging type (for example, \abbrev{JAR} or 
+\abbrev{WAR}) needs to be filled in. After that, source code that is 
+placed in the correct directory can be automatically built, tested, 
+packaged and distributed. \citep{maven,mavenintro}
+
+Maven also introduces a new way of handling project dependencies. 
+Required \abbrev{JAR} packages are often kept under version control 
+only for distributing them to all project developers. There are no 
+real reasons for version controlling the packages themselves. With 
+Maven, the packages required by the project are kept in one or 
+multiple Maven repositories. The requirements, or dependencies, are 
+written to the Maven configuration file. Maven will then automatically 
+download the required artifacts from the repositories. Maven provides 
+a central repository that contains a number of standard Java project 
+requirements, such as logging components and the Apache Commons 
+\citep{commons} components. In case the required artifacts are not 
+found on the central repository, a company can easily set up its own 
+Maven repository. In addition, when running Maven tasks, the 
+dependencies are automatically appended to classpath, so there is no 
+need for developers to maintain long lists of classpath entries in 
+different configuration files. \citep{maven}
+
+
+% Version Control: Subversion
+%----------------------------
+\subsection{Version Control: Subversion}
+\label{toc:oss:selected:svn}
+
+Any software project that is going to production requires a version 
+control to store the different versions of the software and to help 
+merge conflicts that happen when two developers modify the same source 
+code file at the same time. The dominant open-source version control 
+system has been the Concurrent Versions System \cite{cvs}. However, 
+\abbrev{CVS} and \abbrev{RCS}, which it is based on, are old 
+technologies, and they have not changed to match new software 
+development requirements. \citep{versioncontrol} 
+
+A new, compelling open source replacement to \abbrev{CVS} is 
+Subversion \citep{svn}. It has been developed to be a replacement of 
+\abbrev{CVS}, so developers working with \abbrev{CVS} should have no 
+difficulties in moving to Subversion. Most of the problems with 
+\abbrev{CVS} have to do with directories, since \abbrev{RCS} does not 
+know anything about them. Subversion has been developed to fully 
+support directories and to maintain version history when moving files 
+around.
+
+Branching in Subversion has also been changed from the traditional 
+style. There are no conventional (\abbrev{CVS}-style) branches in 
+Subversion; rather, any directory can be virtually copied under a new 
+name. The new directory is just a link, and will store only the 
+modifications that are made under that directory. The version history 
+before the copying point remains the same for both directories. These 
+virtual directory copies effectively work as branches, but they can 
+also be used for other purposes.
+
+Subversion can be run either as its own server or under the Apache 
+\abbrev{HTTP} server. When running under Apache, the Subversion code 
+repositories can also be reached via normal \abbrev{HTML} web 
+browsers. This allows for easy code and change inspection from outside 
+the office.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Summary
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+\label{toc:oss:summary}
+
+This chapter provided an introduction to open-source software and the 
+Open Source Initiative, which maintains the Open Source Definition and 
+promotes the use of open-source software in software business industry.
+
+Section~\ref{toc:oss:usage} supplied the motivation and justification 
+for using open-source software. While some open source projects can be 
+of questionable quality, most of them compete with their proprietary 
+counterparts. For some open source projects, technical excellence is 
+the primary goal. Using mainstream \abbrev{OSS} can be seen as a safe 
+choice.
+
+In section~\ref{toc:oss:selected}, various \abbrev{OS} solutions were 
+presented for the problems and requirements identified in 
+chapter~\ref{toc:webdevel}. The section listed well-known, mainstream 
+\abbrev{OS} solutions that can be taken for production use.
+

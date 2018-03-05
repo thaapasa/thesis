@@ -1,0 +1,83 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-------------------------------------------------------------------
+% Project: KAPSELI
+%-------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\selectlanguage{british}
+\chapter{Project: KAPSELI}
+\label{toc:project}
+
+This chapter describes the 
+\finnish{KAPSELI}-project\footnote{\finnish{KAPSELI} is an 
+abbreviation of the Finnish words \textsl{\finnish{kiinteistöt, 
+asiakkaat, projektit, seuranta, lisämyynti}}.} and its requirements. 
+In the project, \finnish{HiQ Softplan Oy} creates a new implementation 
+of a web-based real estate transaction system for \finnish{GVA Finland 
+Oy}. Crucial attributes of the new system are extensibility, 
+maintainability and modularity. The open-source solutions and agile 
+software development methods presented in this thesis are applied in 
+the execution of the project.
+
+First, the current situation and future needs of \finnish{HiQ Softplan 
+Oy}'s client, \finnish{GVA Finland Oy}, are presented. The current 
+system is described and the need for a new system is identified. After 
+that, the requirements for the new software system are summarised.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Current Situation
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Current Situation}
+\label{toc:project:current}
+
+\finnish{GVA Finland Oy} uses an existing web-based real estate 
+transaction system. The administrative side of the system is used to 
+record information about facilities that are on sale or for rent and 
+customers that are selling, renting or purchasing these facilities. 
+Other companies can use the public side of the system to search for 
+facilities for their own use. Both the administrative side and the 
+public side are accessible with a standard web browser.
+
+The current system works fine for this purpose, but \finnish{GVA 
+Finland Oy} has new requirements and the system needs to be extended. 
+Furthermore, an interactive map service needs to be integrated into 
+the system, and the customer information needs to be moved into a 
+customer relationship management (\abbrev{CRM}) system. In addition, 
+support for generating reports needs to be included in the system.
+
+The new business requirements set more demands for the architecture of 
+the system. It was decided to reimplement the system because of the 
+new demands and because the original source codes were not available 
+at first. The new system is designed to have a more robust structure 
+and backing frameworks. The software will be implemented on top of 
+widely used open-source solutions using agile software development 
+methods.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Software Requirements
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Software Requirements}
+\label{toc:project:requirements}
+
+The basic requirements for the first release of the new real estate 
+transaction system are threefold. First of all, the new system must 
+contain the same functionality than the existing system with the 
+exception of customer management, which is moved to a \abbrev{CRM} 
+system. Secondly, an interactive map software, which will be provided 
+by a third party, needs to be integrated to the system. Finally, the 
+customer management side needs to be integrated to a \abbrev{CRM} 
+system provided by a third party.
+
+In addition, the software architecture needs to be implemented in such 
+a way that it supports extending the basic functionality later on. 
+Future extension ideas include custom reports and different types of 
+sales projects. Some changes were also planned for the business object
+representation and handling in the administrative side of the system. 
+
+It was also decided to renew the layout of the system. In addition to 
+creating a new graphical layout to the system, some changes were 
+planned for the administrative forms used to manage the real estates 
+in the system. The look and feel of these forms was not finalised 
+during the planning phase of the project, and it was decided that 
+these will be iterated during the development process.

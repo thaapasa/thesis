@@ -1,0 +1,138 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-------------------------------------------------------------------
+% Introduction
+%-------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\selectlanguage{british}
+\chapter{Introduction}
+\label{toc:intro}
+
+As the software engineering field develops, traditional approaches to 
+software development start to be inadequate. Customers of software 
+development companies have more and more complicated requirements for 
+their software. It is no longer feasible to develop all the components 
+of a system in-house \citep{usingj2ee}. Customers expect the software 
+to conform to their needs, even though they are not always able to 
+define them exactly beforehand. Traditional software development 
+processes, in which the customer's first touch to the developed 
+software is in the end of the project, start falling apart. To remedy 
+these problems, new approaches are required \citep{agileinnovation}.
+
+Fortunately many software libraries, frameworks and tools exist on the 
+market to aid the software development process. Traditionally these 
+tools and libraries have been proprietary, but more and more extensive 
+and robust solutions are starting to appear on the market from the 
+open source community. Open-source software is software that can be 
+freely used, modified and distributed provided that certain 
+restrictions are observed \citep{usingoss}. However, for most 
+purposes, the majority of open-source solutions can be used freely, 
+even in a commercial project. \cite{ossolutions} provides numerous 
+proficient arguments for using open-source software in the commercial 
+world, such as low costs, no vendor lock-in, and reliability. Open 
+source projects are guided by technology instead of business needs, 
+with technical excellence often as the primary goal.
+
+A traditional software development process identifies change as the 
+enemy, and sets out to minimise the amount of change required 
+throughout the project. This has, however, proven to be a badly 
+working approach \citep{agileinnovation}. The requirements set out at 
+the beginning of the project are often not final, but change as the 
+project progresses. The initial requirements may be incorrect, even if 
+no apparent change has happened during the project. Presently, 
+eliminating change early means being unable to meet changing business 
+conditions, which leads to business failure \citep{agileinnovation}. 
+Agile software development methods take an alternative viewpoint to 
+this problem: they embrace change. Instead of trying to plan 
+everything at the beginning of a project, the agile approach is to 
+support change. The agile practices and methods are designed to 
+diminish the cost of change, and to provide early feedback to the 
+customer. \cite{agilesdm} provide an excellent summary of modern agile 
+methodologies.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Scope
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Scope}
+\label{toc:intro:scope}
+
+Both open-source software and agile methodologies are starting to gain 
+grounds in the literature. Studies favouring the adoption of agile 
+practices and open-source solutions have begun to emerge 
+\citep{agileadoption,usingoss}. However, studies concerning the usage 
+of open-source solutions in agile development are scarce. This thesis 
+sets out to study and test \textsl{how well a set of mature 
+open-source solutions can be used in a commercial project that is 
+managed using agile methodologies}. This is evaluated by initiating 
+and analysing a case study project.
+
+To accomplish this goal, this thesis studies the current state of 
+software development from the viewpoint of modern Java web 
+applications. The Java programming language provides a solid, robust 
+base for enterprise applications, and Java was a requirement of the 
+case study project. Web applications, on the other hand, are an 
+interesting test subject, because they can be developed rapidly, yet 
+larger web applications require a full-blown server architecture that 
+needs to be comprehensive, scalable and distributable. Additionally, 
+web applications are often usable from anywhere in the world, so they 
+potentially have a very large user group. This thesis concentrates on 
+discovering the areas of web development in which libraries, tools and 
+frameworks can be used. Consequently, software solutions from the open 
+source market are presented to match the requirements. The selection 
+criteria for the open-source solutions is that they must be reliable, 
+widely-used mainstream products with a large user base.
+
+Furthermore, some agile development methods are introduced and 
+studied. In this thesis, the practices of two most popular agile 
+methodologies, Extreme Programming \citep{xpexplained} and Scrum 
+\citep{scrumprocess} are studied in detail. Extreme Programming 
+describes a software development approach that consists of a number of 
+common-sense development practices that together form an efficient, 
+yet light-weight process. \abbrev{XP} relies on simple initial design 
+and supports even large restructurings later on. Scrum, on the other 
+hand, concentrates on agile project management and not on the used 
+development methods. Again, these were selected because they are 
+presently two of the most popular agile methodologies 
+\citep{rapidxp,agilesdm} and they can be used together because they 
+target different aspects of the software development process. 
+Additionally, the adoption of agile methodologies is discussed. 
+\cite{agileadoption} reports that it is better to select only a few 
+practices when adopting an agile process instead of trying to tackle 
+everything at once.
+
+To test the selected approach, a commercial case study project is 
+carried out using the presented open-source solutions and a subset of 
+the described agile practices. In the project, \finnish{HiQ Softplan 
+Oy} develops a real estate transaction system for \finnish{GVA Finland 
+Oy}. The resulting software is measured and evaluated with the 
+\abbrev{CK} metric suite \citep{oodmetrics}, and the adoption of 
+\abbrev{XP} practices is evaluated by using the \abbrev{XP} Evaluation 
+Framework \citep{xpevaluationfw}. Finally, the usage of open-source 
+software in agile development projects is analysed based on both the 
+results obtained from these metrics and subjective evaluation of the 
+project.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Outline of the Work
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Outline of the Work}
+\label{toc:intro:outline}
+
+The structure of this thesis follows the layout described in the 
+previous section closely. First, chapter \ref{toc:webdevel} describes 
+the current state of web software development and presents several 
+areas in which existing, reusable software solutions could be used. 
+Subsequently, in chapter \ref{toc:oss}, software solutions from the 
+open source market are identified to meet these requirements. After 
+that, chapter \ref{toc:agile} introduces the relatively new agile 
+methodologies and describes the practices of \abbrev{XP} and Scrum. 
+Chapter \ref{toc:evaluation} presents metrics for measuring software 
+quality and evaluating the adoption of agile practices. Chapters 
+\ref{toc:project} and \ref{toc:selected} describe the project 
+requirements and the selected approach for carrying out the project in 
+detail. After that, chapter \ref{toc:result} goes through the results 
+obtained from the selected metrics and the evaluation of the project. 
+Finally, chapter \ref{toc:conclusions} presents the conclusions based 
+on the executed project.
+

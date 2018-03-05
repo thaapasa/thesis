@@ -1,0 +1,201 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-------------------------------------------------------------------
+% Conclusions
+%-------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\selectlanguage{british}
+\chapter{Conclusions}
+\label{toc:conclusions}
+
+In this thesis, the current state of web software development was 
+analysed and its requirements were identified. Consequently, software 
+solutions from the open source market were presented to meet those 
+requirements. Furthermore, the relatively new agile methodologies were 
+introduced as an alternative approach to software development. 
+Finally, a suite of mature, \textsl{de~facto} open-source solutions 
+was selected for use in a real business software project that was 
+managed using a subset of Scrum and \abbrev{XP} agile software 
+development practices. The produced software was measured using a set 
+of known software metrics, and the agile development practices were 
+evaluated with a framework designed for that purpose. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Produced Software
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Produced Software}
+
+The software created in the project was developed using the selected 
+\abbrev{XP} development practices. The basic structure of the 
+application was largely dictated by the Apache Struts framework, which 
+was selected as the web framework for the project. In addition, the 
+other open-source solutions used in the project also set some 
+limitations on the software architecture. However, these limitations 
+were not necessarily a problem. By using mature frameworks, the 
+developed software inherited a robust, well-tested architecture that 
+is more extensible and maintainable than what could have been created 
+in-house with the available resources.
+
+For the development work, the team followed \abbrev{XP}'s simple 
+design practice, and the software was designed only to meet the 
+current needs. Consequently, constant refactoring was required to 
+maintain software quality and to meet new requirements. To support 
+this, the team maintained an extensive unit test suite. The developers 
+could be convinced that a structural change to the software had not 
+broken anything by accident. Finally, the completed software was 
+evaluated by using the \abbrev{CK} metrics suite, which contains six 
+metrics that measure object-oriented design complexity. The resulting 
+values were compared to the values of four larger software systems, 
+whose metric values were presented in literature. Based on the 
+comparison, the software design is not too complicated and maintaining 
+the software should not present any larger problems.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Open-Source Solutions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Open-Source Solutions}
+\label{toc:conclusions:oss}
+
+On the basis of the results of the project it can be concluded that 
+the open source community has strong solutions to offer for the web 
+software development industry. There should be no reason why this 
+finding would not be true for other fields of software engineering as 
+well. Mature \abbrev{OS} solutions that have a strong user community 
+behind them have proven to be robust, extensive and efficient. The 
+best \abbrev{OS} solutions are lacking none of the features provided 
+by their commercial counterparts. In addition, with open-source 
+software, a company always has the option of customising the software 
+to its own needs, should it be necessary. However, the \abbrev{OS} 
+solutions that are not as widely used do contain elements of risk. It 
+is possible that a small \abbrev{OS} project dies out, leaving the 
+software unmaintained. However, this problem is not specific to the 
+open source community. A commercial product can also die out if the 
+company behind it goes bankrupt, or decides that it is no longer 
+profitable to keep on maintaining the product.
+
+Most of the mainstream \abbrev{OS} frameworks used in the project 
+worked well in agile development. Especially Spring and Hibernate 
+supported the need for constant refactoring by being easy to configure 
+and change. Spring Framework, which is a Java~\abbrev{EE} framework 
+for enterprise applications, supports the test-driven approach by 
+making all parts of the application automatically available for unit 
+tests. Spring has been designed to support writing easily testable 
+code, and all the components could easily be retrieved for testing by 
+using the application context provided by Spring. The Spring 
+application context was also convenient when setting up and 
+refactoring the application architecture, since inter-object 
+relationships could be set up from a single configuration file instead 
+of hard-coding the object instantiations all around the software code.
+
+Perhaps even more notably than Spring, Hibernate excelled when 
+refactoring code. Hibernate is an object/relational mapping framework 
+that allows developers to map their objects directly into a database, 
+with no need to write database queries by hand. Because the Hibernate 
+Annotations were used, the database mappings could be changed at the 
+same time when the data object code itself was changed. Because there 
+was no need to update separate configuration files, the database 
+mapping configuration stayed up-to-date at virtually all times. 
+Indeed, separate configuration files were identified as a possible 
+problem source when refactoring. With a single framework, the 
+maintaining work should not be too large a problem. However, with 
+several frameworks integrated to work together, multiple configuration 
+files might need to be maintained when a change is made. This can 
+cause problems because some of the required updates can easily be 
+forgotten. In addition, because configuration related to a single 
+functionality can be separated to many configuration files, the source 
+of a possible problem can be hard to locate.
+
+Although software frameworks contain features that support agile 
+development practices, most of the agile practice support comes from 
+the software tools used in the development process itself. The Eclipse 
+\abbrev{IDE}  is a perfect example of an open-source development 
+environment that is an invaluable aid in agile software development. 
+Starting from the code completion, code browsing and automatic import 
+management features, coding in Eclipse is much more efficient than 
+coding with a normal text editor. Furthermore, for agile development, 
+Eclipse contains features such as test case skeleton generation, 
+integrated test suite running and automatic code refactoring tools. 
+With the refactoring tools it is possible to rename a method or a 
+class and automatically update all the invocations. With these tools, 
+the effort required for applying large structural changes is 
+diminished.
+
+Even though most of the selected open-source solutions worked well in 
+the project, and several of them supported the agile development 
+practices well, there are still problems with the adoption of new 
+software solutions. Foremost of all, the learning curve required to 
+start using an application framework is still high, as well with 
+open-source solutions as with commercial products. In this area, 
+open-source solutions do have the drawback that their documentation 
+can be inadequate. Some open source projects have exceedingly good 
+documentation, but others might not have any documentation at all. 
+Generally, with commercial products, at least some sort of 
+documentation exists. Because of this, adopting an \abbrev{OS} 
+solution can possibly require a vast amount of exploratory work to 
+find out how the software works and how it is used. Of the selected 
+open-source software, XDoclet~2 contained virtually no documentation 
+at all and the documentation of both Maven and Struts was partly 
+incomplete and disorganised. The other solutions were either 
+adequately or well documented. The findings here corresponding to 
+documentation generally adhere with the basic principle for selecting 
+open-source software -- the larger and more widely used the product, 
+the better the documentation. For Struts, which is a widely used 
+product, there exists many other sources of documentation, such as 
+books and articles published by other authors.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Agile Development Methods
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Agile Development Methods}
+\label{toc:conclusions:agile}
+
+The selected agile development practices performed with varying 
+degrees. Most of the practices were adopted well, and the team managed 
+to carry out the project using an extremely lightweight process. 
+However, the size of the team and the project must be taken into 
+account when analysing the agile methods. Managing the activities of 
+three persons can be easily coordinated regardless of the process; in 
+contrast, managing a ten-man agile team requires stricter adherence to 
+the selected processes and practices.
+
+In the executed project, the selected subset of Extreme Programming 
+practices was found to be effective in developing the system. The 
+principles of simple design and refactoring allowed the team to 
+quickly produce working drafts of the system for the customer to test. 
+To mitigate the possible quality problems from simple initial design, 
+the testing and refactoring practices have been used successfully to 
+uphold the quality of the code. However, the need for some initial 
+design has been identified for some of the core components in larger 
+systems to avoid the need for massive structural changes later on. 
+
+Perhaps not surprisingly, the most problematic of the selected 
+\abbrev{XP} practices was the testing practice. The practice of 
+writing all unit tests first does not come easily to developers, even 
+though the justifications for the practice itself are well-based in 
+theory. Developers feel that the actual implementation code is too 
+easy to write at the same time when coding the skeletons required for 
+creating the tests. However, the author has heard comments that once 
+developers have used the practice successfully for a while, they would 
+not like to switch away from it.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Summary
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+\label{toc:conclusions:summary}
+
+As a quick summary, mature open-source solutions and agile development 
+methods can work well together, with a net effect of enhanced 
+productivity and low development costs. However, no silver bullet is 
+provided by either the open source community or the agile 
+methodologies. There are still risks in using open-source software 
+that is not widely used. Furthermore, the agile methodologies are 
+still relatively young and not extensively studied. Fortunately the 
+open source community is gaining foothold in the commercial world and 
+studies are being made on the agile development practices. It is the 
+author's belief that open-source software will be used more often in 
+software projects that will be managed using agile processes.
+

@@ -1,0 +1,665 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-------------------------------------------------------------------
+% Evaluation and Analysis of the Project
+%-------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\selectlanguage{british}
+\chapter{Evaluation and Analysis of the Project}
+\label{toc:result}
+
+This chapter evaluates the produced software and the processes used in 
+the project. The first section begins with an evaluation of the 
+suitability of the selected open-source solutions in agile software 
+development. After that, the produced software is evaluated based on 
+the measured \abbrev{CK} metric values. The second section describes 
+the agile software development methods selected for the project. 
+First, the adoption of \abbrev{XP} practices is evaluated by using the 
+\abbrev{XP} Evaluation Framework. The section ends with an analysis of 
+the usage of both \abbrev{XP} and Scrum in the project. Finally, a 
+high-level summary on the outcome of the project is given.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Software
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Software}
+\label{toc:result:software}
+
+A comprehensive set of open-source solutions was selected in 
+section~\ref{toc:selected:oss} to work as a basis for the 
+implementation and to support the development process. This section 
+begins with a subjective analysis of how well the selected software 
+performed in the agile development process. After that, the software 
+quality is evaluated and analysed based on the measured \abbrev{CK} 
+metric suite values.
+
+% Open-Source Solutions
+% ---------------------
+\subsection{Open-Source Solutions}
+\label{toc:result:software:oss}
+
+The frequent refactorings that were applied set high expectations 
+especially on the maintainability of the open-source software used in 
+the project. The evaluations for the selected solutions are given 
+below.
+
+\begin{description}
+
+\item[Apache Struts] Struts was used as the core of the web components 
+of the system. In the implemented system, the web components form the 
+largest part of the system. This means that most of the application 
+architecture was dictated by Struts. This can be seen to contain both 
+positive and negative aspects. Because the Struts architecture has 
+been developed over a period of many years, and it has been used in a 
+multitude of projects world-wide, the architecture can be expected to 
+be more robust and extensible than what could have been produced 
+in-house for this relatively short project. The negative side of this 
+is that the development team did not have as much freedom when 
+designing the system. However, the team did not encounter many 
+problems caused by this.
+
+In other areas there were some inconveniences, especially with the 
+integration to Spring. For example, creating a new Action component 
+required writing configuration information to a total of three 
+different configuration files (the configuration files of Struts, 
+Spring and Tiles\footnote{Tiles is a template engine for creating a 
+common look and feel for web applications. Tiles is shipped as a part 
+of Struts, but it can be used without Struts too. In this project 
+Tiles was integrated to Struts.}). This made the maintaining of the 
+configuration files laborious and error-prone. However, there were not 
+as many Struts Action configuration changes as feared, even though the 
+system code was refactored often. Because of this, the maintenance of 
+Struts configuration was not such big of an issue. Nonetheless, if and 
+when structural changes need to be applied to that configuration, some 
+problems can be expected. Another shortcoming of Struts was that there 
+was no simple way of applying multiple actions to a single request. 
+Because of that, authorisation checking had to be done in all action 
+components instead of configuring it in the Struts configuration file. 
+The next major release of Struts introduces action chaining which 
+might provide a better solution for this issue.
+
+Another problematic area with Struts was unit testing. Plain Struts 
+does not offer much in way of supporting unit testing. In the end, 
+unit testing the action components was accomplished by creating dummy 
+request and mapping objects and executing the actions by hand. 
+However, this approach did not allow testing of the view components.
+
+The problems noticed were not critical, however. On the whole Struts 
+worked fine and provided a robust basis for the web components of the 
+system. In addition, Struts~2, which is the next major release of 
+Struts, promises to address some of the issues the current version of 
+Struts has.
+
+\item[Spring Framework] Spring delivered exactly what it promised to 
+deliver to the project. There were no major problems with the creation 
+and configuration of the system objects. The dependency injection 
+mechanism proved to be a convenient way of setting up the 
+relationships between system objects. This allowed rapid development 
+of new objects. However, since all the relationships of the objects 
+were set from outside of them, it was not apparent from the code if 
+all the required dependencies were properly initialised. In some 
+occasions, a link was forgotten between two objects, which was not 
+seen before the software crashed when trying to use the nonexistent 
+link. Spring does provide the means for calling an initialisation 
+method after the dependencies are set, which makes it possible to 
+check that the object has been fully initialised. Nevertheless, it is 
+still easy to forget either the method itself or the configuration 
+required to call the method. Another solution for this would be to use 
+constructor injection, in which the constructor can check that all the 
+required links are set. However, with this approach, creating circular 
+references\footnote{A circular reference is a situation where the 
+dependency path of a set of objects is not a tree.} is not possible.
+
+Using Spring turned out to be helpful for unit testing, because every 
+system object was available for the unit tests via the Spring 
+application context. The ease of creating and configuring new objects 
+was also beneficial for refactoring. All in all, Spring performed
+rather well in this project.
+
+\item[Hibernate] Managing the business object mappings to database 
+proved to be easy with Hibernate Annotations\footnote{Hibernate 
+Annotations was used in the project instead of configuration files 
+generated by XDoclet; see the comments on XDoclet for explanation.}. 
+The basic approach of keeping the mappings alongside with the objects 
+made rapid development possible. In addition, Hibernate can be 
+configured to automatically create and update the required database 
+table structure. In effect, no \abbrev{SQL} table creating scripts 
+were required for the project. Furthermore, all the database queries 
+could be created by a query criteria creation facility provided by 
+Hibernate. Because of this, the project contains no hand-written 
+\abbrev{HQL} (or \abbrev{SQL}) queries. The database-related code is 
+cleaner and easier to maintain with the object-oriented query 
+generation functions.
+
+However, some of these benefits have their downsides as well. 
+Annotating the business objects ties the objects themselves to the 
+database tier. For this project this was not seen to be such a big 
+problem, but for larger objects a separate interface or implementation 
+should perhaps be created to keep the different application tiers 
+properly separated. Another problem was transaction management. In 
+this case, the problem was not in the transaction management system 
+itself, but rather in how many ways there are to manage the 
+transactions. Hibernate and Spring provide numerous different ways in 
+which transactions can be configured, such as manually coding the 
+transactions and automatically setting up the transactions with 
+annotations or configuring them with aspects. In addition, manual 
+transactions can be configured either with Hibernate itself or with 
+wrappers provided by Spring. The proper transaction management 
+strategy selection was further complicated by automatic transaction 
+creation for incoming requests to Struts actions.
+
+Testing Hibernate was easy with Hibernate--Spring integration. 
+Database connections and connection pooling could be managed via the 
+Spring configuration file, and data access objects could be fetched 
+via the Spring application context. Refactoring the data objects was 
+also easy, because the annotation could be updated at the same time. 
+The only downside was that if the type of a property was changed, 
+Hibernate did not update the database table column accordingly. Also, 
+Hibernate does not delete old columns or tables from database, so some 
+manual work still had to be done.
+
+\item[XDoclet] This was clearly the most problematic tool selected for 
+the project. Originally, XDoclet was supposed to create the Hibernate 
+mapping files, and Struts and Spring configuration files. Shortly 
+after the project started, Hibernate Annotations was released for 
+production use, and the separate mapping files were replaced with 
+annotations. Generating the Struts configuration files worked fine, 
+except for merging the static and dynamic configuration parts, which 
+did not seem to work at all. In effect, the configuration file had to 
+be manually merged from the generated file and the static files. 
+Spring configuration file generation did not work at all. In the end,
+it was decided to leave XDoclet out of the project. 
+
+It is possible that the problems experienced with XDoclet are only 
+specific to XDoclet~2. It seems that the project might be dying out, 
+because there have been no releases or site updates for a year and 
+there is virtually no documentation at all available for the tool.
+
+\item[Eclipse] As expected, Eclipse supported the agile development 
+process well. The refactoring tools were extremely useful when 
+applying structural changes. Especially the automatic renaming tools 
+proved to be an invaluable aid in refactoring. Another useful tool was 
+the problem list, which provides a list of current compilation 
+failures and warnings with links to the offending locations. In the 
+simplest case, it was possible just to change some functionality (for 
+example, method parameters), and then fix all invocations of the 
+method by navigating via the problem list.
+
+\item[Apache Maven] Maven was selected for the project because it 
+promises to simplify the build process. The standard directory 
+structure turned out to be extensive, and the building of the project 
+was effortless, after Maven had been properly configured. However, 
+configuring Maven for the first time was a tedious task. This was 
+partly due to poor or missing documentation. In some cases, the 
+documentations of Maven~1 and Maven~2 were intermingled, even though 
+the functionality had changed between the releases. In addition, 
+configuring the Maven repository for libraries that were not available 
+in the Maven central repository presented some problems at first.
+
+Another problematic area in Maven is custom tasks. The idea of the 
+build lifecycle is integrated strongly in Maven, and executing tasks 
+outside the normal lifecycle is not directly supported. To create a 
+custom Maven task, a Java plug-in has to be created. Maven also 
+supports running custom Ant tasks with the Maven Antrun plug-in. 
+However, there seems to be no way of creating different Ant tasks that 
+could be run separately, because the tasks run outside the lifecycle 
+are selected by the plug-in name.
+
+Overall, Maven was perhaps too complex for this project. On the other 
+hand, Maven was mainly used as the build and dependency management 
+tool. The reporting and documentation features of Maven were not used. 
+Because of this, the additional value of Maven over a traditional 
+build tool was not self-evident.
+
+\item[Subversion] There were no problems encountered with using 
+Subversion. In fact, because Subversion integrates with the team 
+development tools of Eclipse, the usage of Subversion is identical to 
+using \abbrev{CVS}. It is expected that most of the benefits of 
+Subversion over \abbrev{CVS} will become apparent later on, because 
+the modification histories are available even if a file has been 
+renamed or moved under a different directory.
+
+There is one problem with Subversion's preference of using 
+\abbrev{HTTP} as the transport protocol, namely, proxies that do not 
+support all the required commands. There are some \abbrev{HTTP} 
+proxies that cannot be used when connecting to Subversion 
+repositories. For these cases, the stand-alone Subversion server can 
+be used, but it is not as straight-forward to configure, at least if 
+the Apache version needs to be running too. However, if proxies are 
+not required, there does not seem to be any reason not to use 
+Subversion over \abbrev{CVS}.
+
+\end{description}
+
+As a summary, most of the solutions selected worked well in the 
+project. The tools that did not perform as well were not mentioned as 
+often in literature as the tools that did. This supports the claim 
+that using mainstream open-source software is a lasting solution. The 
+tools and frameworks that had a strong community and long use history 
+worked well and were updated frequently, even during the execution of 
+this project.
+
+
+% Software Quality
+% ----------------
+\subsection{Software Quality}
+\label{toc:result:software:quality}
+
+The produced software quality is evaluated and analysed in this 
+section. Basic software size metrics are given in table 
+\ref{table:metrics:size} as background information. The lines of class 
+code shown in the table represent the lines of executable program 
+statements, with comments and blank lines omitted.
+
+\begin{center}
+\begin{longtable}{|l|r|}
+
+\caption[Software Size Metrics]{Software Size Metrics} 
+\label{table:metrics:size}\\
+\hline \textbf{Metric} & \textbf{Value}\\
+\hline \endfirsthead
+
+\hline \textbf{Metric} & \textbf{Value}\\
+\hline \endhead
+
+Number of Classes & 184\\
+\hline Number of Production Classes & 120\\
+\hline Number of Test Classes & 64\\
+\hline Lines of Class Code (\abbrev{LOCC}) & 11679\\
+\hline Production \abbrev{LOCC} & 6545\\
+\hline Test \abbrev{LOCC} & 5134\\
+\hline
+\end{longtable}
+\end{center}
+
+The metrics obtained from the \abbrev{CK} metric suite are presented 
+in table \ref{table:evaluation:ck}. The values were obtained using 
+AOPMetrics \citep{aopmetrics}. Only the values for the actual 
+production code were calculated, since the metrics for the test code 
+were not considered meaningful. Because some of the names used in the 
+\abbrev{CK} suite differ from the terms used in AOPMetrics, both of 
+the terms are listed in the table for the metrics with differing 
+names. In these cases, the \abbrev{CK} metric suite name precedes the 
+name used in AOPMetrics.
+
+\begin{center}
+\begin{longtable}[h]{|l|r|r|r|r|r|}
+\caption[CK Metric Values]{CK Metric Values} \label{table:evaluation:ck}\\
+\hline \textbf{Metric} & \textbf{Mean} & \textbf{Std.Dev.} & 
+\textbf{Median} & \textbf{Min} & \textbf{Max}\\
+\hline 
+\endfirsthead
+\endhead
+Weighted Methods per Class & & & & &\\
+Weighted Operations in Module & $8.32$ & $11.60$ & $4$ & $0$ & $74$\\
+\hline
+Depth of Inheritance Tree & $1.25$ & $1.33$ & $1$ & $0$ & $4$\\
+\hline
+Number of Children & $0.34$ & $1.76$ & $0$ & $0$ & $18$\\
+\hline
+Coupling Between Object Classes & & & & &\\
+Coupling Between Modules & $3.58$ & $4.15$ & $2$ & $0$ & $23$\\
+\hline
+Response For a Class & & & & &\\
+Response For a Module & $14.02$ & $16.71$ & $8$ & $0$ & $85$\\
+\hline
+Lack of Cohesion in Methods & & & & &\\
+Lack of Cohesion in Operations & $69.99$ & $272.80$ & $0$ & $0$ & $2246$\\
+\hline
+\end{longtable}
+\end{center}
+
+To evaluate the measured values, the four software systems analysed by 
+\citep{oodmetrics} and \citep{ckanalysis} shall be used as comparison 
+points. These systems are named A, B, C and D for the purposes of this 
+comparison. Basic characteristics of these systems and the metric 
+values are presented in appendix \ref{toc:appendix:comparison}. 
+Because the systems are different and the similarity of the 
+measurements cannot be verified, no hard conclusions can be drawn from 
+the comparisons. However, the comparisons should give a subjective 
+viewpoint of the general quality of the produced system. The 
+comparison and evaluation results are listed below.
+
+\begin{description}
+
+\item[Weighted Methods per Class] The \abbrev{WMC} metric values of 
+the developed system are similar, but somewhat below the values in all 
+of the four comparison systems. Since the \abbrev{WMC} metric is a 
+simple prediction for the time and effort required to maintain the 
+class, the values obtained point to the conclusion that the developed 
+system should not be overly hard to maintain.
+
+\item[Depth of Inheritance Tree] Again, the \abbrev{DIT} metric values 
+are equal or somewhat below the values of the compared systems. These 
+values indicate that there are no overly long hierarchy paths that 
+would complicate system maintenance. The values obtained from this 
+metric support the conclusions derived from the \abbrev{WMC} metric 
+values.
+
+\item[Number of Children] The \abbrev{NOC} metric values have only 
+been calculated for systems A and B. The values measured from the 
+produced system are again lower than in the these systems, whose 
+average maximum value is $46$. This can be explained simply with the 
+fact that systems A and B are much larger than the system developed in 
+this project.
+
+\item[Coupling Between Object Classes] The comparison systems had some 
+variance in the values for the \abbrev{CBO} metric. Systems A and B 
+had relatively large maximum values, but the median value for system A 
+was zero. Compared to the other systems, the median and mean values 
+are on the same scale, and the maximum value of the developed system 
+is lower. Thus, the developed system should not have excessive 
+couplings.
+
+\item[Response for a Class] The \abbrev{RFC} metric values were not 
+calculated for systems C and D. System A has approximately same median 
+value but a larger maximum value, and the \abbrev{RFC} values for 
+system B are several times larger than the values for the developed 
+system. According to this metric, the classes should not be too 
+complicated. This conclusion is in line with the results from the 
+\abbrev{CBO} metric.
+
+\item[Lack of Cohesion in Methods] Again, the \abbrev{LCOM} metric has 
+only been measured for systems A and B. However, the values in those 
+systems are far lower than the maximum value for the measured system. 
+The maximum values for systems A and B are only $200$ and $17$, 
+respectively. However, the large values in the developed system are 
+caused by a group of classes with very high \abbrev{LCOM} readings. 
+There are twelve classes in the system with an \abbrev{LCOM} value 
+that is over $100$. In contrast, there are 68 classes whose 
+\abbrev{LCOM} value is zero, and a total of 85 with an \abbrev{LCOM} 
+value that is under ten. The twelve offending classes are Struts 
+\code{ActionForms}, business objects, and search criteria classes. A 
+connecting property for all these classes is that they have multiple 
+property fields that have accessors and mutators (getters and 
+setters). The problem with the \abbrev{LCOM} metric is that, by 
+definition, accessors and mutators increase the \abbrev{LCOM} value, 
+since they access only single properties and thus are not cohesive. 
+The suggestion for large \abbrev{LCOM} readings is to refactor the 
+classes into smaller pieces, but that does not seem to be reasonable 
+for classes that model domain information or are used to transfer 
+data. To get more realistic readings from this metric, perhaps it 
+would be better to leave out accessors and mutators from the 
+calculations.
+
+\end{description}
+
+As a summary, the metrics seem to indicate that the quality of the 
+produced system is at an acceptable level, even scoring somewhat 
+better results for some metrics in comparison to the four other 
+systems. The only exception is the value of the \abbrev{LCOM} metric, 
+which is excessively high. However, as discussed above, this is 
+probably caused by classes that are not suited for the metric instead 
+of bad design as such. According to the metrics, the maintenance of 
+the developed system should not present any special problems.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Agile Practices
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Agile Practices}
+\label{toc:result:agile}
+
+This section presents the evaluations of the selected agile methods 
+and their adoption. First, the \abbrev{XP} practice adoption is 
+evaluated using the \abbrev{XP} Evaluation Framework. After that, 
+subjective comments on the adoption of Scrum are given.
+
+
+% Extreme Programming
+% -------------------
+\subsection{Extreme Programming}
+\label{toc:result:agile:xp}
+
+The \abbrev{XP} Evaluation Framework \citep{xpevaluationfw} introduces 
+a triangulated \abbrev{XP} adherence analysis, which was adopted for 
+this work and presented in table 
+\ref{table:evaluation:xpam:triangulated}. The \textsl{adherence 
+hurdle} and \textsl{comment} columns have been merged into a single 
+\textsl{comment} column. The table contains the values from the Shodan 
+Input Metric Survey (appendix \ref{toc:appendix:shodan}).
+
+\begin{center}
+\begin{longtable}{|l|c|c|p{7.3cm}|}
+
+\caption[Triangulated XP Adherence Analysis]{Triangulated XP Adherence 
+Analysis\\\small\abbrev{DoA} stands for Degree of Adoption, \abbrev{PW}
+for Practice Weight.} \label{table:evaluation:xpam:triangulated}\\
+
+\hline \textbf{Practice} & \textbf{DoA} & \textbf{PW} & 
+\textbf{Comment}\\ \hline \endfirsthead
+
+\hline \textbf{Practice} & \textbf{DoA} & \textbf{PW} & 
+\textbf{Comment}\\ \hline \endhead
+
+Testing\footnote{Testing contains the average values from both 
+automated unit tests and test first design.} & 50\% & $4$ & Unit tests 
+for most of the functionality was created, but not for all. Schedule 
+pressure and working habits prevented full adoption.\\ \hline
+
+Refactoring & 67\% & $3$ & Some team members did a lot of refactoring, 
+others refactored only when refactoring was directly connected to the 
+work at hand.\\ \hline
+
+Short Releases & 77\% & $2$ & The project has only one major release, 
+but several sprint releases were set up on a test server for the 
+customer to test.\\ \hline
+
+Coding Standards & 90\% & $1$ & Code formatting rules were configured 
+to Eclipse's code formatter. Coding and logging practices were mostly 
+obeyed directly, and the few divergent cases were quickly refactored 
+to match the standards.\\ \hline
+
+Collective Ownership & 90\% & $3$ & Team members had no problems in 
+changing code written by other developers.\\ \hline
+
+Simple Design & 77\% & $3$ & In a few cases some functionality that 
+was known to be included later on was taken into consideration even 
+though it was not directly used.\\ \hline
+
+\end{longtable}
+\end{center}
+
+The results indicate that the selected \abbrev{XP} practices were 
+mostly adopted satisfactorily, with an overall adoption degree of 
+72\%\footnote{This value is the weighted average of the individual 
+practice adoption degrees.}. However, there were some practices that 
+were not adopted as well as they could have been. A subjective 
+analysis of the results and the experiences from the project follows.
+
+\begin{description}
+
+\item[Testing] Testing was problematic, because writing unit tests for 
+every possible action of the system was not seen to be fully 
+justified, although the team was aware of the benefits from having an 
+extensive test suite. Furthermore, because the team was often in a 
+hurry to make a feature work, not all of the tests were actually 
+written before the code, but were supplied after the functionality was 
+written. One problem was that because unit tests do require the 
+skeletons of the final classes to be written before the tests, it was 
+too easy just to create the full functionality while creating the 
+skeleton. However, it was identified that even tests written 
+afterwards are better than no tests at all.
+
+\item[Short Releases] The team produced some intermediate releases for 
+the customer to test. However, there was no schedule to the releases 
+and the releases were given out whenever some new functionality was 
+added to the system. This worked, because the team was small, code was 
+continuously integrated to the version control system and deploying a 
+new release only took a quarter of an hour. For a larger project an 
+approach like this would not work, and the releases would have to be 
+scheduled beforehand.
+
+\item[Coding Standards] The coding standards were adopted with 
+surprisingly few problems. The developers could agree on the code 
+formatting rules as well as on the standard practices for logging and 
+information placement. Again, the smallness of the team was helpful in 
+agreeing on the common standards.
+
+\item[Collective Ownership] This practice was also adopted with no 
+problems. Especially the coding standards were helpful in the adoption 
+of collective ownership. It seems that without good coding standards 
+this practice cannot function very well, as developers could 
+potentially start changing an existing component to suite their 
+immediate needs without regard to the intended purpose of the 
+component. This could be a serious problem in a larger project.
+
+\item[Simple Design] In most cases, the simple design practice was 
+adopted quite well. However, in a few cases the design was taken 
+further than what would have been absolutely necessary for the 
+situation. In these cases the requirements were known to be included 
+in the final release, so the design beforehand was considered a safe 
+bet. Another feeling the team had was that for core components of a 
+large system the simple design might not be the best approach, because 
+massive refactorings would be required later on. In these cases it 
+might be better to design a bit further to keep the amount of 
+refactoring needed low.
+
+\end{description}
+
+In addition to the subjective metrics, the objective metrics of the 
+\abbrev{XP} adherence metrics were also measured for the relevant 
+practices. The results of the measurements are listed in table 
+\ref{table:evaluation:xpam:objective}. According to the results, the 
+unit test suite was run quite often. This is explained simply because 
+running the test suite only took around a minute, so it could be 
+easily run often. Test code ratio was still relatively high, even 
+though not all functionality was tested. However, the test suite has 
+proven very useful in quickly determining whether a larger change has 
+caused more than the intended effects. Release lengths have also been 
+kept quite close to what \abbrev{XP} proposes, even though they were 
+not scheduled.
+
+\begin{center}
+\begin{longtable}{|l|l|l|}
+
+\caption[Objective XP Adherence Metric Values]{Objective XP Adherence 
+Metric Values} \label{table:evaluation:xpam:objective}\\
+\hline \textbf{Metric} & \textbf{Practice} & \textbf{Value}\\
+\hline \endfirsthead
+
+\hline \textbf{Metric} & \textbf{Practice} & \textbf{Value}\\
+\hline \endhead
+
+Unit Test Runs / Person Day & Testing & 3--4\\
+\hline
+
+Test \abbrev{LOC} / Source \abbrev{LOC} & Testing & 78\%\\
+\hline
+
+Release Length & Short Release & Release: 3 months\\* & & Iteration: 2 
+weeks\\
+\hline
+
+\end{longtable}
+\end{center}
+
+As a summary, the selected subset of \abbrev{XP} has been adopted 
+mostly successfully with only a few setbacks. One key factor in this 
+is perhaps the fact that only a few of the practices were taken into 
+use at once, so there were not too many new practices to tackle. 
+Another one is that the team was so small. For a larger team, the 
+practices would need to be followed more strictly, and more resources 
+should be assigned for their implementation.
+
+
+% Scrum
+% -----
+\subsection{Scrum}
+\label{toc:result:agile:scrum}
+
+In contrast to \abbrev{XP}, Scrum was not adopted equally well. This 
+was perhaps due to the fact that the project team and the project 
+itself was so small that there was no need for strict project 
+management practices. Another point is that some of the \abbrev{XP} 
+practices also served in coordinating the team's work. The selected 
+Scrum practices and their adoption are commented below.
+
+\begin{description}
+
+\item[Product Backlog] A backlog was adopted and kept posted on the 
+wall for everyone to see. In addition to the list, the team had three 
+columns arranged on the wall, where post-it notes could be posted. 
+Items taken from the backlog were moved from the \textsl{todo} column 
+to the \textsl{active} column and finally to the \textsl{done} column. 
+The ScrumMaster kept the status of the items on the backlog up to 
+date, but not all of the requirements were added to the backlog 
+itself. Some of them were just posted on the columns. In a few small 
+cases, no tracked item was even created. This worked well for this 
+small project, but for a larger project, the requirement tracking 
+needs to be done more rigorously.
+
+\item[Effort Estimation] All of the original requirements were 
+estimated at the beginning of the project as the customer required 
+them. However, when new requirements were added or previous 
+requirements were expanded, new estimations were not always made. In 
+addition, because there were no predefined schedules for the 
+intermediate releases, the requirements for a given sprint did not 
+have to be estimated very accurately. The team could work with the 
+original, imprecise estimates as well.
+
+\item[Sprint] The sprints adopted for the project turned out to be 
+somewhat informal. There were no precise schedules and only a few 
+planning meetings. The requirements for each sprint were not clearly 
+defined, but instead a developer worked on a component for as long as 
+it took to finish it, and then moved to the next component. Since the 
+team was small enough, the ScrumMaster could still have an overview of 
+the current situation and be assured that the project was heading the 
+right way.
+
+\item[Daily Scrum Meeting] The daily Scrum meetings were kept most of 
+the days. However, the team did not have an exact time specified for 
+the meeting, and the meeting was held whenever all the team members 
+happened to be at work. This soon turned out to be a bad idea, since 
+the meeting invariably interrupted with the developers' coding flow. 
+Nonetheless, the meetings were seen to be an effective way of keeping 
+everyone up to date, although the situation was quite clear anyway 
+because the team members worked around the same table.
+
+\end{description}
+
+As a summary, the team did not strictly adhere to the selected project 
+management practices, because both the team and the project was so 
+small, and there was no pressing need for rigorous project management. 
+However, some of the practices were found to be useful even if they 
+were adopted only partly. For any larger project, even for a single 
+ten-man Scrum team, the practices need to be followed more thoroughly.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Summary
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+\label{toc:result:summary}
+
+This chapter described the suitability of the open-source solutions in 
+agile development, presented the software quality metric values and 
+analysed the adoption of the agile practices. Section 
+\ref{toc:result:software} presented the selected open-source solutions 
+and analysed their usage in the project. Most of the selected software 
+worked well, and provided a robust basis on which the software could 
+be built. However, some problem areas were also identified when using 
+less widely-used open-source solutions. Most pressing of these is the 
+lack of proper documentation; one tool was practically undocumented. 
+The findings of the project adhere to the findings presented in 
+literature; namely, using mainstream open-source software is a safe 
+solution, but less well-known \abbrev{OS} solutions do have their 
+risks. Afterwards, the \abbrev{CK} software quality metric values were 
+presented and analysed. According to the values, the produced 
+software is of good quality, and maintaining it should not present any 
+special problems.
+
+The agile development methods selected for the project were analysed 
+in section \ref{toc:result:agile}. The adoption of \abbrev{XP} was 
+evaluated using the \abbrev{XP} Evaluation Framework. The values from 
+the adherence metrics indicate that the selected \abbrev{XP} practices 
+were mostly obeyed in the project, but there is space for some 
+improvement in the practice adoption. After that, some subjective 
+comments on both \abbrev{XP} and Scrum were given. Especially Scrum 
+was not followed through rigorously. However, both the team size and 
+the project itself was small, and there was no need for rigid process 
+adherence. In the end, the team managed to finish the project by using 
+a very lightweight approach. Especially the \abbrev{XP} development 
+practices worked well in this small project, allowing the team to 
+design the software for only the current needs.
+

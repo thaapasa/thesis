@@ -1,0 +1,206 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-------------------------------------------------------------------
+% Software Project Evaluation
+%-------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\selectlanguage{british}
+\chapter{Software Project Evaluation}
+\label{toc:evaluation}
+
+In order to evaluate a software development project and its outcome, a 
+set of evaluation metrics is required. The evaluation of a project is 
+an important requirement for concrete software process improvement. An 
+abundant amount of methods exist for measuring the software itself, 
+but metrics for agile development processes are scarce. In this 
+thesis, a metric for measuring the software itself is presented 
+alongside with a metric for evaluating the adoption of Extreme 
+Programming practices.
+
+First, the Chidamber-Kemerer metrics \citep{oodmetrics} for measuring 
+object-oriented software are presented. The \abbrev{CK} metric suite 
+is a known and used set of methods for measuring different quality 
+aspects of software. After that, the Extreme Programming Evaluation 
+Framework \citep{xpevaluationfw} is introduced. The \abbrev{XP-EF} is 
+a set of metrics that provide information on how well the \abbrev{XP} 
+methods have been taken into use and how successful the team has been. 
+The \abbrev{XP-EF} metrics have been designed so that they can be used 
+in a small team without a dedicated metrics specialist.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Chidamber-Kemerer Metrics
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Chidamber-Kemerer Metrics}
+\label{toc:evaluation:ck}
+
+To improve the software process used in a company and the quality of 
+the produced software, a method for measuring the software is 
+required. With object-oriented software engineering, the traditional 
+methods for evaluating software are no longer appropriate. 
+\cite{oodmetrics} report that the conventional software metrics are 
+lacking appropriate mathematical properties and are without a solid 
+theoretical base. They proceed to propose a set of methods that are 
+firmly rooted in theory and relevant to practitioners in 
+organisations. After almost ten years, the \abbrev{CK} metrics have 
+been used in measuring software and \cite{ckanalysis} present further 
+evidence in support of a correlation between the values obtained from 
+the \abbrev{CK} suite and software defects.
+
+The \abbrev{CK} suite contains six metrics for measuring software 
+design. The metrics are taken from \citep{oodmetrics} and they are 
+summarised below.
+
+\begin{enumerate}
+
+\item \textbf{Weighted Methods per Class (\abbrev{WMC})}\\* This 
+metric is a weighted sum of all the methods in a class. In the 
+original \abbrev{CK} suite, a weight was assigned to each method based 
+on the complexity of the method. The actual implementation was not 
+specified, however, and some researchers suggest that the weight can 
+be ignored, and the metric can simply count the amount of methods in 
+the class \citep{ckanalysis}.
+
+The number of methods in a class predicts how much time and effort is 
+required to develop and maintain the method. The method count has an 
+impact also on the children of the class, since all but private 
+methods are inherited to the children.
+
+\item \textbf{Depth of Inheritance Tree (\abbrev{DIT})}\\* This metric 
+calculates the longest path from the measured class to a root class in 
+the inheritance hierarchy. Longer inheritance paths indicate greater 
+design complexity since more classes and methods are involved. Longer 
+paths also allow for greater potential reuse of inherited methods.
+
+\item \textbf{Number of Children (\abbrev{NOC})}\\* This metric 
+calculates the number of immediate children that have inherited from 
+the measured class. Greater number of children indicates greater 
+reuse, since inheritance is a form of reuse. However, a large number 
+of children may also be caused by improper subclassing. In any case, 
+classes with large child counts have a greater influence on the 
+overall design of the system and thus require more testing.
+
+\item \textbf{Coupling Between Object Classes (\abbrev{CBO})}\\* This 
+metric calculates the number of classes to which the measured class is 
+coupled. The value is an indication on how independent the class is. 
+Excessive coupling between classes is detrimental to modular design 
+and prevents reuse. Highly coupled classes are also more sensitive to 
+changes in other classes. Classes that have high coupling require more 
+testing than independent ones.
+
+\item \textbf{Response For a Class (\abbrev{RFC})}\\* This metric 
+calculates the amount of methods that can potentially be called in 
+response to a message received by an instance of the measured class. 
+This set is defined to be the union of all the methods in the class 
+and all the methods that can be called from the methods of the class. 
+Large values for this metric indicate that the class is complex and 
+debugging it is more difficult since a greater level of understanding 
+is required. More testing time should also be allocated for classes 
+that have a large response value.
+
+\item \textbf{Lack of Cohesion in Methods (\abbrev{LCOM})}\\* This 
+metric calculates the difference between the amount of non-similar 
+method pairs and the amount of similar method 
+pairs\footnote{Similarity of method pairs is the amount of same 
+instance variables that the methods operate on; a similar method pair 
+is therefore a method pair whose similarity is non-zero.} in a class. 
+Negative values are truncated to zero. Classes with more similar 
+method pairs than non-similar ones are desirable, since they are 
+cohesive. A large \abbrev{LCOM} value indicates that the class 
+contains separate functionality and should therefore be partitioned 
+into multiple cohesive classes.
+
+\end{enumerate}
+
+The \abbrev{CK} metrics provide a suite of measurements that can be 
+used to evaluate object-oriented software. The metrics can be used to 
+track down key problem areas in a software system and provide a way to 
+compare different projects.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% XP Evaluation Framework
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{XP Evaluation Framework}
+\label{toc:evaluation:xpef}
+
+As discussed before, Extreme Programming has been gaining popularity, 
+but empirical evidence concerning the use of \abbrev{XP} has been 
+scarce. One reason for this is the lack of proper metrics. One such 
+metric is the Extreme Programming Evaluation Framework 
+\citep{xpevaluationfw}. The \abbrev{XP-EF} comprises of three parts, 
+namely, the \abbrev{XP} \textsl{context factors} (\abbrev{XP-cf}), the
+\abbrev{XP} \textsl{adherence metrics} (\abbrev{XP-am}) and the \abbrev{XP}
+\textsl{outcome measures} (\abbrev{XP-om}). Of these, the \abbrev{XP} 
+context factors are used to track down the exact context of the 
+project, from software classification and sociological factors to 
+ergonomic and geographic factors. These factors are important when 
+considering the differences between two projects.
+
+The \abbrev{XP} adherence metrics are used to evaluate how well the 
+project has adopted the \abbrev{XP} practices. The evaluation of 
+adherence is based on both subjective and objective measures. The 
+subjective measures consist of a fifteen-part Shodan Adherence Survey 
+questionnaire \citep{xpevaluationfw}, which is presented to each team 
+member. The questions are all linked to single \abbrev{XP} practices, 
+and the answers form a subjective measurement on how well the 
+practices have been adopted. All fifteen measurements can be combined 
+to form a single value that indicates how well \abbrev{XP} has been 
+adopted on the whole. The measurements of the questions are weighted 
+with the weight of the corresponding \abbrev{XP} practice. The weight 
+of a practice is defined to be the amount of other \abbrev{XP} 
+practices the specific practice supports. These weights are originally 
+calculated from the \abbrev{XP} practice support diagram presented in 
+\citep{xpexplained}.
+
+The objective measures consist of nine metrics that can be measured 
+either automatically or manually. These contain metrics such as the 
+ratio between test code and source code; and unit test runs per day. 
+Both the subjective and objective metrics are listed in 
+\citep{xpevaluationfw}.
+
+The \abbrev{XP} outcome measures is a set of measures that evaluate 
+the produced software. The \abbrev{XP-om} includes calculating the 
+\abbrev{CK} metrics and McCabe Complexity\footnote{An introduction to 
+the McCabe Complexity can be found, for example, in \citep{mccabe}.} 
+of the software, and furthermore requires the calculation of six more 
+\abbrev{XP}-specific metrics. These metrics are described in detail in 
+\citep{xpevaluationfw}.
+
+Although the \abbrev{XP} Evaluation Framework is a relatively new 
+framework, it has been already used in some projects. 
+\cite{evaluatingxp} report that the \abbrev{XP-EF} has been 
+comprehensive enough in a case study while not imposing too much 
+burden on the team members. They acknowledge, however, that there is 
+still work to be done in validating and extending the framework.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Summary
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Summary}
+\label{toc:evaluation:summary}
+
+In this chapter, the need for measuring software systems and software 
+projects has been identified. The chapter also presented two methods 
+for these purposes. 
+
+Section~\ref{toc:evaluation:ck} introduced the known and used 
+\abbrev{CK} metric suite. The suite has been used in measuring 
+object-oriented software and has proven to be useful in identifying 
+problem areas in software systems.
+
+In section~\ref{toc:evaluation:xpef}, a relatively new framework for 
+evaluating Extreme Programming was presented. The \abbrev{XP} 
+Evaluation Framework consists of several subjective and objective 
+metrics that can be easily calculated alongside a project. The 
+metrics provide information on how well the \abbrev{XP} practices have 
+been adopted and how high the quality of the produced software is.
+
+In conclusion, it is important to realise that to gain the most value 
+out of any software metrics, a comparison point should be available. 
+This can be another project, or an earlier version of the same 
+project. The metric values can still be used by themselves to locate 
+problem areas in software, or to obtain subjective evaluations of the
+project.
+

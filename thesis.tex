@@ -1,0 +1,556 @@
+\documentclass[11pt,a4paper,final,british,finnish,dvipdfm]{report}
+
+\usepackage[british,finnish]{babel}
+\usepackage[dvipdfm,dvips]{graphicx,color}
+\usepackage[square]{natbib}
+\usepackage{t1enc,a4,epsfig,tabularx,array,longtable,subfigure}
+\usepackage{palatino}
+\usepackage{url,makeidx,fancyhdr}
+
+\newcommand{\mytitle}{Using Open-Source Solutions in Agile Software 
+Development}
+
+\newcommand{\mytitlefi}{Avoimen lähdekoodin ratkaisut ketterässä 
+ohjelmistokehityksessä}
+
+\newcommand{\myauthor}{Tuukka Haapasalo}
+\newcommand{\myprofessor}{Professor Eljas Soisalon-Soininen}
+\newcommand{\myinstructor}{Jukka-Petri Sahlberg, M.Sc.(Tech.)}
+\newcommand{\myprofessorfi}{Professori Eljas Soisalon-Soininen}
+\newcommand{\myinstructorfi}{DI Jukka-Petri Sahlberg}
+
+\newcommand{\mydate}{17.1.2007}
+\newcommand{\mydateen}{January 17, 2007}
+\newcommand{\mydatefi}{17. tammikuuta, 2007}
+
+\newcommand{\mykeywordsen}{agile, open source, software development, 
+software library, framework, tool, practice} 
+\newcommand{\mykeywordsfi}{ketterät kehitysmenetelmät, avoin 
+lähdekoodi, open source, ohjelmistokehitys, ohjelmistokirjasto, 
+sovelluskehys, käytäntö}
+
+\usepackage[dvipdfm,a4paper,pdfsubject={Master's Thesis},pdftitle={\mytitle},pdfauthor={\myauthor},pdfkeywords={\mykeywordsen},final,bookmarksnumbered=true,breaklinks=true,colorlinks=true,linkcolor=black,anchorcolor=black,citecolor=black,filecolor=black,menucolor=black,pagecolor=black,urlcolor=black]{hyperref}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-------------------------------------------------------------------
+% Definitions
+%-------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\selectlanguage{british}
+
+\newcommand{\pbox}{\parbox}
+
+\setlength{\parindent}{0mm}
+\setlength{\parskip}{0ex}
+\setlength{\textwidth}{150mm}
+\newlength{\summarywidth}
+\setlength{\summarywidth}{144.5mm}
+\renewcommand{\baselinestretch}{1,25}
+\setlength{\oddsidemargin}{1cm}
+\setlength{\evensidemargin}{1cm}
+\setlength{\topmargin}{-4mm}
+
+\pagestyle{fancy}
+\setlength{\headheight}{14.5pt}
+\renewcommand{\chaptermark}[1]{\markboth{\thechapter. #1}{}}
+\renewcommand{\sectionmark}[1]{\markboth{\thesection. #1}{}}
+\lhead{\fancyplain{}{\leftmark}}
+\rhead{\fancyplain{}{\textrm{\thepage}}}
+\cfoot{\fancyplain{\thepage}{}}
+
+\makeatletter
+\def\url@smallurlstyle{%
+  \@ifundefined{selectfont}{\def\UrlFont{\sf}}{\def\UrlFont{\small\ttfamily}}}
+\makeatother
+%% Now actually use the newly defined style.
+\urlstyle{smallurl}
+
+
+% Tables and figures
+\makeatletter
+\def\fnum@figure{{\scshape Figure \thefigure}}
+\def\fnum@table{{\scshape Table \thetable}}
+\makeatother
+\newcommand{\todo}[1]{\textit{ToDo: #1}}
+\newcommand{\finnish}[1]{#1}
+\newcommand{\code}[1]{{\small\texttt{#1}}}
+\newcommand{\codefn}[1]{{\scriptsize\texttt{#1}}}
+\newcommand{\abbrev}[1]{{\sc #1}}
+
+\makeindex
+
+\selectlanguage{finnish}
+\hyphenation{asiak-kaat}
+
+\selectlanguage{british}
+\hyphenation{java-bean}
+\hyphenation{java-beans}
+\hyphenation{Java-Bean}
+\hyphenation{Java-Beans}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-------------------------------------------------------------------
+% Document begins
+%-------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\pagenumbering{roman}
+\thispagestyle{empty}
+
+HELSINKI UNIVERSITY OF TECHNOLOGY\\
+Department of Computer Science and Engineering\\
+Laboratory of Software Technology
+
+\vskip 14em
+
+\myauthor
+\vskip 2em
+{\Large \textbf{\mytitle}}
+\vskip 1em
+
+\vskip 25em
+
+Master's Thesis
+
+\finnish{Espoo},~\mydateen
+
+\vskip 2em
+
+\begin{tabular}[!h]{@{}p{2cm}l}
+  Supervisor & \myprofessor\\ 
+  Instructor & \myinstructor\\
+\end{tabular}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-------------------------------------------------------------------
+% Abstracts
+%-------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+{
+  \selectlanguage{british}
+  \setlength{\extrarowheight}{4pt}
+  \newlength{\valuecolslen}
+  \setlength{\valuecolslen}{11.42cm}
+  \newlength{\extraskiprow}
+  \setlength{\extraskiprow}{\extrarowheight}
+  \addtolength{\extraskiprow}{-\baselineskip}
+  \newcommand{\summaryheader}[1]{\textbf{#1}}
+
+  \newpage
+  \thispagestyle{plain}
+
+  \begin{tabular}{|p{2.6cm}p{4.4cm}l|}
+    \multicolumn{1}{l}{}\vspace*{-1.4cm}\\
+    \multicolumn{3}{@{}l@{}}{\small {HELSINKI UNIVERSITY OF TECHNOLOGY 
+    \hfill ABSTRACT OF MASTER'S THESIS}}\\
+    \hline
+    \summaryheader{Author:} & \multicolumn{2}{l|}{\myauthor}\\
+    \summaryheader{Title of thesis:} &
+    \multicolumn{2}{p{\valuecolslen}|}{\mytitle}\\
+    \summaryheader{Date:} & \mydateen & 
+    \summaryheader{Pages:} \pageref{page:last:predoc} + \pageref{page:last:doc}\\[4pt]
+    \hline
+    \summaryheader{Department:} & 
+    \multicolumn{2}{l|}{Department of Computer Science and Engineering}\\
+    \summaryheader{Professorship:} & \multicolumn{2}{l|}{T-106}\\[4pt]
+    \hline
+    \summaryheader{Supervisor:} & \multicolumn{2}{l|}{\myprofessor}\\
+    \summaryheader{Instructor:} & \multicolumn{2}{l|}{\myinstructor}\\[4pt] \hline
+    \multicolumn{3}{|l|}{
+      \parbox[t]{\summarywidth}{       
+
+Software requirements are becoming more and more complicated. Software 
+systems can no longer be developed feasibly without the aid of 
+supporting libraries and tools. For this purpose, commercial software 
+libraries have been created to be reused across multiple projects. 
+Presently, open-source solutions are beginning to emerge alongside 
+their commercial counterparts to support virtually all areas of 
+software development.\\[2ex]
+Additionally, customers expect custom-made systems to meet their needs 
+in a constantly changing business world. Because requirement changes 
+are on the increase, it is no longer feasible to plan everything up 
+front. Change must be embraced in software development. The relatively 
+new agile methodologies adopt change as an integral part of the 
+software development process.\\[2ex]
+This thesis studies how well the software libraries, frameworks and 
+tools available from the open source community perform in agile 
+software development projects. A commercial project is initiated to 
+serve as a case study. A set of mature, mainstream open-source 
+solutions is selected for the project, and agile methodologies are 
+used in the project management. The project and the resulting software 
+are measured and evaluated using a set of metrics designed for 
+evaluating both software quality and agile methodology adoption.\\[2ex]
+On the basis of the results from the metrics and subjective evaluation 
+of the project, it can be concluded that mature open-source solutions 
+and agile development methods can work well together, with features of 
+the frameworks and tools supporting the agile practices.}}\\
+  && \\[\extraskiprow]
+  \hline
+    \summaryheader{Keywords:} &
+      \multicolumn{2}{p{\valuecolslen}|}{\mykeywordsen}\\[4pt]
+    \hline
+  \end{tabular}
+
+  \selectlanguage{finnish}
+  \hyphenation{tie-to-tek-nii-kan}
+  \newpage
+  \thispagestyle{plain}
+
+  \begin{tabular}{|p{2.6cm}p{4.4cm}l|}
+    \multicolumn{1}{l}{}\vspace*{-1.4cm}\\
+    \multicolumn{3}{@{}l@{}}{\small {\finnish{TEKNILLINEN KORKEAKOULU} 
+        \hfill \finnish{DIPLOMITYÖN TIIVISTELMÄ}}}\\
+    \hline 
+    \summaryheader{\finnish{Tekijä:}} & \multicolumn{2}{l|}{\myauthor}\\
+    \summaryheader{\finnish{Työn nimi:}} &
+    \multicolumn{2}{p{\valuecolslen}|}{\mytitlefi}\\
+    \summaryheader{\finnish{Päiväys:}} & \mydatefi & 
+    \summaryheader{\finnish{Sivumäärä:}} \pageref{page:last:predoc} + \pageref{page:last:doc}\\[4pt]
+    \hline
+    \summaryheader{\finnish{Osasto:}} & \multicolumn{2}{l|}{\finnish{Tietotekniikan osasto}}\\
+    \summaryheader{\finnish{Professuuri:}} & \multicolumn{2}{l|}{\finnish{T-106}}\\[4pt]
+    \hline
+    \summaryheader{\finnish{Työn valvoja:}} & \multicolumn{2}{l|}{\finnish{\myprofessorfi}}\\
+    \summaryheader{\finnish{Työn ohjaaja:}} & \multicolumn{2}{l|}{\finnish{\myinstructorfi}}\\[4pt]
+    \hline
+    \multicolumn{3}{|l|}{\parbox[t]{\summarywidth}{
+
+\finnish{Nykyisille ohjelmistojärjestelmille asetetaan yhä korkeampia 
+odotuksia. Uusien järjestelmien kehittäminen ei enää ole käytännössä 
+mahdollista ilman ulkoisia ohjelmistokirjastoja ja työkaluja. 
+Kehitystyön tueksi on kehitetty monia kaupallisia uudelleenkäytettäviä 
+kirjastoja. Nykyään myös avoimen lähdekoodin ratkaisuja alkaa olla 
+saatavilla käytännössä kaikkien ohjelmistokehityksen osa-alueiden
+tueksi.}\\[2ex]
+\finnish{Lisähaasteena ohjelmistokehityksessä on nykyisen liike-elämän 
+tarpeiden vaihtelevuus. Asiakkaat olettavat ohjelmistoprojektien 
+mukautuvan muuttuviin vaatimuksiin myös myöhäisessä vaiheessa 
+kehitysprojektia. Perinteisissä kehitysprosesseissa vaatimukset
+yritetään määrittää mahdollisimman tarkasti projektin alussa, ja
+niiden muutoksiin on hankala reagoida. Uudehkot ketterät
+ohjelmistokehitysmenetelmät asettavat muutoksen kehitysprosessin 
+keskeiseksi tekijäksi.}\\[2ex]
+\finnish{Tässä diplomityössä tutkitaan, kuinka hyvin avoimen 
+lähdekoodin kirjastot, sovelluskehykset ja työkalut toimivat 
+ketterässä ohjelmistokehitysprojektissa. Työssä käytetään kaupallista 
+projektia tutkimuskohteena. Projektiin on valittu joukko yleisesti 
+käytettyjä avoimen lähdekoodin ratkaisuja ohjelmistokehityksen tueksi. 
+Projektia hallinnoidaan käyttäen ketteriä menetelmiä. Projekti 
+tuloksineen mitataan ja arvioidaan käyttäen hyväksi ohjelmiston 
+laadullisten ominaisuuksien arviointiin tarkoitettuja sekä ketterien 
+menetelmien käyttöönottoa arvioivia mittareita.}\\[2ex]
+\finnish{Saatuihin tuloksiin ja subjektiiviseen arviointiin perustuen
+johtopäätöksenä voidaan sanoa, että avoimen lähdekoodin ratkaisut
+voidaan onnistuneesti yhdistää ketterään ohjelmistokehitysprojektiin.
+Useat tutkittujen sovelluskehysten ja työkalujen ominaisuudet tukivat
+hyvin ketteriä menetelmiä.}}}\\
+    && \\[\extraskiprow]
+    \hline
+    \summaryheader{\finnish{Avainsanat:}} & 
+      \multicolumn{2}{p{\valuecolslen}|}{\mykeywordsfi}\\[4pt]
+    \hline
+  \end{tabular}
+}
+
+\newpage
+\selectlanguage{british}
+
+\setlength{\parindent}{5mm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-------------------------------------------------------------------
+% Acknowledgements
+%-------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter*{Acknowledgements}
+\label{toc:acknowledgements}
+
+First of all, I would like to thank my supervisor, professor 
+\finnish{Eljas Soisalon-Soininen}, for his proactive approach and 
+support in getting this thesis done as soon as possible. Similarly, I 
+want to thank my instructor, \finnish{Jukka-Petri Sahlberg}, for his 
+quick responses to my endless questions and for his appropriate, 
+succinct guidance. Thanks go also to my company, \finnish{HiQ Softplan 
+Oy}, for providing me with the setting for this thesis. I wish to 
+especially thank \finnish{Jukka Paananen} for maintaining the good 
+relationship between our company and the client. In addition, I would 
+like to express my gratitude to the staff at \finnish{GVA Finland Oy} 
+for their welcoming attitude concerning this work.
+
+I very much want to thank my beloved \finnish{Anu} for her love and 
+support and also for her sharp eye and detailed comments. I also want 
+to thank my co-worker \finnish{Jussi Vesala} for helping me getting 
+started with thesis writing, and my colleague \finnish{Jouni 
+Hartikainen} for providing me with excellent feedback on my initial 
+draft.
+
+Without the support from all of you, this thesis would not be the 
+same. You have my sincere gratitude.
+
+\vskip 17ex
+
+\finnish{Espoo},~\mydateen
+\vskip 0.5em
+\myauthor
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-------------------------------------------------------------------
+% Table of Contents
+%-------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents
+
+\include{thesis-00-abbreviations}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-------------------------------------------------------------------
+% List of Figures 
+%-------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\lhead{\fancyplain{}{\leftmark}}
+
+\listoffigures
+\label{toc:listoffigures}
+\addcontentsline{toc}{chapter}{List of Figures}
+
+\listoftables
+\label{toc:listoftables}
+\addcontentsline{toc}{chapter}{List of Tables}
+
+
+% Last page of the pre-document
+\label{page:last:predoc}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-------------------------------------------------------------------
+% Start of actual document
+%-------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\pagenumbering{arabic}
+
+\include{thesis-01-intro}
+\include{thesis-02-webdevel}
+\include{thesis-03-oss}
+\include{thesis-04-agile}
+\include{thesis-05-evaluation}
+\include{thesis-06-project}
+\include{thesis-07-selected}
+\include{thesis-08-results}
+\include{thesis-09-conclusions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-------------------------------------------------------------------
+% Bibliography
+%-------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\bibliographystyle{plainnat}
+\makeatletter \addcontentsline{toc}{chapter}{\bibname} \makeatother
+\bibliography{thesis}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-------------------------------------------------------------------
+% Appendixes
+%-------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\selectlanguage{british}
+\newpage
+\appendix
+\chapter{Shodan Input Metric Survey}
+\label{toc:appendix:shodan}
+
+The questions presented in the subjective \abbrev{XP} adherence metric 
+survey are shown in table~\ref{table:survey}. The questions have been 
+taken from \citep{xpevaluationfw}. For each question, the respondents 
+were asked to use the following scale:
+
+\begin{center}
+\begin{tabular}{|rlr|rlr|}
+\hline
+10 & Fanatic & 100\% & 4 & Common & 40\%\\*
+9 & Always & 90\% & 3 & Sometimes & 30\%\\*
+8 & Regular & 80\% & 2 & Rarely & 20\%\\*
+7 & Often & 70\% & 1 & Hardly ever & 10\%\\*
+6 & Usually & 60\% & 0 & Disagree with using this practice & 0\%\\*
+5 & Half 'n Half & 50\% & & & \\*
+\hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{longtable}{|l|p{10.3cm}|}
+
+\caption[Survey Questions]{Survey Questions} \label{table:survey}\\
+\hline \textbf{Practice} & \textbf{Description}\\
+\hline \endfirsthead
+
+\hline \textbf{Practice} & \textbf{Description}\\
+\hline \endhead
+
+Automated Unit Tests & You run automated unit test (such as JUnit) 
+each time you make a change. What \% of your changes are tested with 
+automated unit tests before they are checked in?\\
+\hline
+
+Test First Design & Write test cases, then the code. The test case is 
+the spec. What \% of your code line items were written AFTER an 
+automated test was developed for the corresponding scenario?\\
+\hline
+
+Refactoring & Rewrite code that 'smells bad' to improve future 
+maintenance and flexibility without changing its behaviour. What \% of 
+the time do you stop to cleanup code that has already been implemented 
+without changing functionality?\\ 
+\hline
+
+Short Releases & You have frequent smaller releases instead of larger, 
+less frequent ones. This lets the customer see how it's going and lets 
+you get feedback. How close are you to having releases that are about 
+3 months with interim iterations of a couple weeks?\\ 
+\hline
+
+Coding Standards & Do you have and adhere to team coding standards? 
+Besides brace placement, this may include things like logging and 
+performance idioms. How often do you follow your team standards?\\
+\hline
+
+Collective Ownership & You can change anyone's code and they can 
+change yours. You don't get stuck when the expert is busy on vacation. 
+People know many parts of the system. How often do people change code 
+they did not originally write?\\ 
+\hline
+
+Simple Design & Keep it simple at first; do the simplest thing that 
+could possibly work. You don't follow the philosophy of "I'll include 
+this because the customer might possible need it later" even though 
+the feature isn't in the requirements. Also, you do not spend a lot of 
+time on design documents. How often do you succeed in 'Keeping it 
+Simple'?\\
+\hline
+
+\end{longtable}
+\end{center}
+
+\chapter{Objective XP Adherence Metrics}
+\label{toc:appendix:adherence}
+
+The measurements for the objective \abbrev{XP} adherence
+metric are shown in table~\ref{table:adherence}. The measurements have been 
+taken from \citep{xpevaluationfw}. 
+
+
+\begin{center}
+\begin{longtable}{|p{3.15cm}|l|p{8.0cm}|}
+
+\caption[Objective XP Adherence Metrics]{Objective XP Adherence Metrics}
+\label{table:adherence}\\
+\hline \textbf{Metric} & \textbf{Practice} & \textbf{Description}\\
+\hline \endfirsthead
+
+\hline \textbf{Metric} & \textbf{Practice} & \textbf{Description}\\
+\hline \endhead
+
+Unit Test Runs / Person Day & Testing & While a set of test cases 
+may be available it is the developer's responsibility to run them. 
+This metric determines how often test suites are run.\\
+\hline
+
+Test \abbrev{LOC} / Source \abbrev{LOC} & Testing & Examine the ratio 
+of test lines of code to source lines of code as a relative measure of 
+how much test code is written by the team.\\
+\hline
+
+Release Length & Short Release & Measure the release length in order 
+to gauge the extent to which the project adheres to the 'short 
+release' XP practice. While there is no defined length for what 
+qualifies a short release, XP advocates a maximum of 3 month release 
+period.\\
+\hline
+
+Iteration Length & Short Release & Assess if the team is using short 
+iterations. XP employs short iterations to receive continuous feedback 
+on product development from all stakeholders. XP advocates an 
+iteration length of at most three weeks.\\
+\hline
+
+\end{longtable}
+\end{center}
+
+\chapter{Comparison Metrics}
+\label{toc:appendix:comparison}
+
+This appendix lists the metric values used for comparison purposes in 
+section \ref{toc:result:software:quality}. The values have been 
+calculated for four systems that are described in table 
+\ref{table:comparedsystems}. The values themselves are shown in table 
+\ref{table:comparison}. The original values were presented in 
+differing formats, which is reflected in the table layout. In 
+addition, not all of the metrics were calculated for systems C and D.
+
+
+\begin{center}
+\begin{longtable}{|l|l|r|l|}
+\caption[Compared Systems]{Compared Systems} 
+\label{table:comparedsystems}\\
+\hline \textbf{System} & \textbf{Language} & \textbf{Classes} & \textbf{Source}\\
+\hline \endfirsthead
+
+\hline \textbf{System} & \textbf{Language} & \textbf{Classes} & \textbf{Source}\\
+\hline \endhead
+
+A & C++ & 634 & \citep{oodmetrics}\\
+\hline B & Smalltalk & 1459 & \citep{oodmetrics}\\
+\hline C & C++ & 405 & \citep{ckanalysis}\\
+\hline D & Java & 301 & \citep{ckanalysis}\\
+\hline
+\end{longtable}
+\end{center}
+
+
+\begin{center}
+\begin{longtable}{|l|l|r|r|r|r|}
+
+\caption[Comparison Metrics]{Comparison Metrics}
+\label{table:comparison}\\
+\hline \textbf{Metric} & \textbf{System} & \textbf{Mean} &
+\textbf{Median} & \textbf{Min} & \textbf{Max}\\ \hline \endfirsthead
+
+\hline \textbf{Metric} & \textbf{System} & \textbf{Mean} & 
+\textbf{Median} & \textbf{Min} & \textbf{Max}\\
+\hline \endhead
+
+\abbrev{WMC} & A & - & $5$ & $0$ & $106$\\*
+& B & - & $10$ & $0$ & $346$\\*
+& C & $7.07$ & - & $0$ & $219$\\*
+& D & $12.15$ & - & $0$ & $132$\\
+\hline
+\abbrev{DIT} & A & - & $1$ & $0$ & $8$\\*
+& B & - & $3$ & $0$ & $10$\\*
+& C & $2.36$ & - & $0$ & $5$\\*
+& D & $1.02$ & - & $0$ & $5$\\
+\hline
+\abbrev{NOC} & A & - & $0$ & $0$ & $42$\\*
+& B & - & $0$ & $0$ & $50$\\
+\hline
+\abbrev{CBO} & A & - & $0$ & $0$ & $84$\\*
+& B & - & $9$ & $0$ & $234$\\*
+& C & $2.81$ & - & $0$ & $25$\\*
+& D & $2.94$ & - & $0$ & $29$\\
+\hline
+\abbrev{RFC} & A & - & $6$ & $0$ & $120$\\*
+& B & - & $29$ & $3$ & $422$\\
+\hline
+\abbrev{LCOM} & A & - & $0$ & $0$ & $200$\\*
+& B & - & $2$ & $0$ & $17$\\
+\hline
+\end{longtable}
+\end{center}
+
+% Last page of the actual document
+\label{page:last:doc}
+
+\end{document}
